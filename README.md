@@ -1,4 +1,4 @@
-# Description
+# EnviroPi - Web application to serve smenatically annotated sensor data
 Enviropi is a simple Flask application to serve semantically annotated sensor data for the [Raspberry Pi](https://www.raspberrypi.com/) and the [PIMORONI Enviro pHAT](http://docs.pimoroni.com/envirophat/). The application uses [RDFLib](https://rdflib.readthedocs.io/en/stable/index.html) to serialize data in Linked Data formats like JSON-LD or Turtle.
 
 The [PIMORONI Enviro pHAT](http://docs.pimoroni.com/envirophat/) is an environmental sensor add-on consisting of an accelerometer, pressure, temperature, and light sensor.
@@ -40,23 +40,23 @@ pip install flask==2.2.2 rdflib==6.2.0 waitress=2.1.2
 Congratulations! You have successfully installed all required packages.
 
 
-# Running the application
+## Running the application
 
-## Run with Test Server
+### Run with Test Server
 First, you want to make sure that the application can runs with Flask's test server.
 ```console
 python main.py
 ```
 Check, if the server responds to requests ([check](http://localhost:5000)).
 
-## Run with Waitress
+### Run with Waitress
 Next, check, if Waitress as the WSGI server works.
 ```console
 waitress-serve --listen 0.0.0.0:5000 wsgi:app
 ```
 Check, if the server responds to requests ([check](http://localhost:5000)).
 
-## Run Service
+### Run Service
 At last, set up a service to run the application permanently. For that, move the service file to the system folder. If your user name is not "pi", your project is not named "enviropi", or you did not save the project on home level, you must edit the service file.
 
 ```console
@@ -76,6 +76,3 @@ Check, if the server responds to requests ([check](http://localhost:5000)).
 
 # License
 read [license](LICENSE)
-
-* add flask instance
-* serve single and all observations
