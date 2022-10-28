@@ -1,0 +1,15 @@
+[Unit]
+Description=Waitress instance to serve enviropi
+After=network.target
+
+[Service]
+User=pi
+Group=www-data
+WorkingDirectory=/home/pi/enviropi
+Environment="PATH=/home/pi/enviropi/env/bin"
+
+# Addressing IP:Port
+ExecStart=/home/pi/enviropi/env/bin/waitress-serve --listen 0.0.0.0:5000 wsgi:app 
+
+[Install]
+WantedBy=multi-user.target
