@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EnviroPi</title>
+<link rel="shortcut icon" href="https://www.ti.rw.fau.de/wp-content/themes/FAU-RWFak/img/socialmedia/favicon.ico">
+</head>
+
+<style>
+  table, th, td {
+    border:1px solid black;
+  }
+  </style>
+<body>
+{% for message in get_flashed_messages() %}
+  <p>{{ message }}</p>
+{% endfor %}  
+
+<h2>EnviroPi: {{id}}</h2>
+
+<table>
+  <tr>
+      <th>Timestamp</th>
+      <th>Value</th>
+      <th>Unit</th>
+  </tr>
+  {% for row in table -%}
+  <tr>
+    {% for col in row -%}
+      <th>{{col}}</th>
+    {% endfor %}  
+  </tr>
+  {% endfor %}  
+</table>
+
+</body>
+</html>

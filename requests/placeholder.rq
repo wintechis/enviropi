@@ -1,0 +1,14 @@
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?ts  ?val  ?unit
+WHERE {
+    ?s  rdf:type  sosa:Observation ;
+        sosa:hasResult [ 
+            qudt:numericalValue ?val ;
+            qudt:unit ?unit ] ;
+        sosa:resultTime ?ts .
+    FILTER(STRENDS(STR(?s), "<<Placeholder>>"))
+}
+ORDER BY DESC(?ts)

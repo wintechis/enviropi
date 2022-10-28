@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EnviroPi</title>
+<link rel="shortcut icon" href="https://www.ti.rw.fau.de/wp-content/themes/FAU-RWFak/img/socialmedia/favicon.ico">
+</head>
+<body>
+{% for message in get_flashed_messages() %}
+  <p>{{ message }}</p>
+{% endfor %}  
+
+<h2>EnviroPi: Data Overview</h2>
+
+<ul>
+  {% for name in names -%}
+    {% for ext in exts -%}
+        <li><a href="{{name}}{{ext}}">{{name}}{{ext}}</a></li>
+    {% endfor %}
+  </p>
+  {% endfor %}
+</ul>
+
+<p>For table view use "/table/{attribute}", e.g., <a href="/table/temperature">temperature table</a>.</p>
+
+</body>
+</html>
