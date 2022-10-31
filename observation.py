@@ -48,15 +48,15 @@ class ObservationGraph(Graph):
         for i, val in enumerate(light.raw()):
             self.add_observation(name=lights[i],
                                  value=val,
-                                 u_uri='http://qudt.org/vocab/unit#LUX',
-                                 u_sym='lx',
+                                 u_uri='http://www.w3.org/2001/XMLSchema#unsignedByte',
+                                 u_sym='ubyte',
                                  sensor='BMP280',
                                  property=f'Check{lights[i].capitalize()}')
 
     def add_acc(self):
         for i, mov in enumerate(motion.accelerometer()):
             self.add_observation(name=chr(120 + i),
-                                 value=mov,
+                                 value=round(mov,5),
                                  u_uri='http://qudt.org/vocab/unit#G',
                                  u_sym='G',
                                  sensor='LSM303D',
@@ -71,7 +71,7 @@ class ObservationGraph(Graph):
     
     def add_temp(self):
         self.add_observation(name='temperature',
-                             value=weather.temperature(),
+                             value=round(weather.temperature(),1),
                              u_uri='http://qudt.org/vocab/unit#DEG_C',
                              u_sym='°C',
                              sensor='LSM303D',
@@ -81,7 +81,7 @@ class ObservationGraph(Graph):
             
     def add_pressure(self):
         self.add_observation(name='pressure',
-                             value=weather.pressure(unit='hPA'),
+                             value=round(weather.pressure(unit='hPA'),2),
                              u_uri='http://qudt.org/vocab/unit#HectoPA',
                              u_sym='hPA',
                              sensor='BMP280',
@@ -89,8 +89,8 @@ class ObservationGraph(Graph):
                             )
 
     def add_altitude(self):
-        self.add_observation(name='pressure',
-                             value=weather.altitude(),
+        self.add_observation(name='altitude',
+                             value=round(weather.altitude(),0),
                              u_uri='http://qudt.org/vocab/unit#M',
                              u_sym='m',
                              sensor='BMP280',
