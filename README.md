@@ -1,4 +1,4 @@
-# EnviroPi - Web application to serve smenatically annotated sensor data
+# EnviroPi - Web application to serve semantically annotated sensor data
 Enviropi is a simple Flask application to serve semantically annotated sensor data for the [Raspberry Pi](https://www.raspberrypi.com/) and the [PIMORONI Enviro pHAT](http://docs.pimoroni.com/envirophat/). The application uses [RDFLib](https://rdflib.readthedocs.io/en/stable/index.html) to serialize data in Linked Data formats like JSON-LD or Turtle.
 
 The [PIMORONI Enviro pHAT](http://docs.pimoroni.com/envirophat/) is an environmental sensor add-on consisting of an accelerometer, pressure, temperature, and light sensor.
