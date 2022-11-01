@@ -14,8 +14,8 @@ The landing page provides an overview of all available RDF documents. __"newest.
 
 Observations of a specific sensor can be isolated and displayed in a table. For that, use the attributes name, e.g. _temperature_ or _x_ (for the x-axis of the accelerometer). For the first example, the url would be:
 
-[http://localhost:5000/table/temperature](http://localhost:5000/table/temperature)(if working on the raspberry)
-[http://enviropi.local:5000/table/temperature](http://enviropi.local:5000/table/temperature)(if accessing from other machine)
+* [http://localhost:5000/table/temperature](http://localhost:5000/table/temperature)(if working on the raspberry)
+* [http://enviropi.local:5000/table/temperature](http://enviropi.local:5000/table/temperature)(if accessing from other machine)
 
 The project contains a [mockup file](mock_envirophat.py) for the sensor, if you want to test the application on your computer before running it on the Raspberry Pi. The mockup is used when the original enviro pHAT library is not installed (which is always the case when executed on another platform than Raspberry Pi OS).
 
