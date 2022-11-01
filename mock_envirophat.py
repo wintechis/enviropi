@@ -65,9 +65,9 @@ class cls_motion:
         return self.accelerometer()
 
     def accelerometer(self):
-        return (random.randint(-128, 127),
-                random.randint(-128, 127),
-                random.randint(-128, 127)
+        return (random.uniform(-1, 1),
+                random.uniform(-1, 1),
+                random.uniform(-1, 1)
             )
 
     def heading(self):

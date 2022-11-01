@@ -1,3 +1,8 @@
+![Demonstration](docs/enviropi.gif)
+
+![Supported Python Versions](https://img.shields.io/badge/python-3.9-blue.svg)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 # EnviroPi - Web application to serve semantically annotated sensor data
 Enviropi is a simple Flask application to serve semantically annotated sensor data for the [Raspberry Pi](https://www.raspberrypi.com/) and the [PIMORONI Enviro pHAT](http://docs.pimoroni.com/envirophat/). The application uses [RDFLib](https://rdflib.readthedocs.io/en/stable/index.html) to serialize data in Linked Data formats like JSON-LD or Turtle.
 
@@ -9,91 +14,21 @@ The landing page provides an overview of all available RDF documents. __"newest.
 
 Observations of a specific sensor can be isolated and displayed in a table. For that, use the attributes name, e.g. _temperature_ or _x_ (for the x-axis of the accelerometer). For the first example, the url would be:
 
-[http://localhost:5000/table/temperature](http://localhost:5000/table/temperature)
+[http://localhost:5000/table/temperature](http://localhost:5000/table/temperature)(if working on the raspberry)
+[http://enviropi.local:5000/table/temperature](http://enviropi.local:5000/table/temperature)(if accessing from other machine)
+
+The project contains a [mockup file](mock_envirophat.py) for the sensor, if you want to test the application on your computer before running it on the Raspberry Pi. The mockup is used when the original enviro pHAT library is not installed (which is always the case when executed on another platform than Raspberry Pi OS).
 
 ## Installation
 
-## Booting Raspberry
-
-The first prerequisite is to have a running raspberry pi. If you need to install an operating system first, see the [official website](https://www.raspberrypi.com/software/). The installation guide assumes that you configure the application via SSH connection.
-
-In the settings of the Raspberry Pi Imager, you can set up a hostname, SSH credentials and Wifi settings. Doing so, there is no need to connect the Raspbbery with a keyboard or display. In this installation guide the following settings were made:
-* hostname: enviropi.local
-* user: pi
-* Enable SSH (decide a PW on your own)
-* Set Wifi (set your local Wifi configurations)
-
-Before powering your raspbbery on, connect the environment sensor according to the [pinout](https://pinout.xyz/pinout/enviro_phat). After you are done, put the SD card into the raspberry slot and power the raspberry. The operating system is automatically installed. This can take a while.
-
-You can check with your terminal, if your raspberry is done installing, by pinging it
-```console
-ping enviropi.local
-```
-When you receive responses, you can proceed.
-
-### Establishing a SSH connection
-From now on, you must work on the raspberry. For that, you must establish a SSH connection. Open your preferred terminal (e.g., PowerShell) and type:
-
-```console
-ssh pi@enviropi.local
-```
-You should now see that the line starts with _pi@envirpi:_.
-
-### Enabling I2C
-The I2C protocol is not automatically enabled. To do so, type:
-```console
-sudo raspi-config nonint do_i2c 0
-```
-
-To check, if the I2C connection is working, type:
-```console
-i2cdetect -y 1
-```
-
-You should see the following ouput:
-```console
-     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
-00:                         -- -- -- -- -- -- -- -- 
-10: -- -- -- -- -- -- -- -- -- -- -- -- -- 1d -- --
-20: -- -- -- -- -- -- -- -- -- 29 -- -- -- -- -- -- 
-30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-40: -- -- -- -- -- -- -- -- -- 49 -- -- -- -- -- --
-50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-70: -- -- -- -- -- -- -- 77
-```
-If you do only see dashes and no hexcode, the sensor might not be connected correctly.
-
-### Installing Enviro pHAT library and dependencies
-Next step, you should install/update the sensor's library and dependencies. For that, type:
-
-```console
-curl https://get.pimoroni.com/envirophat | bash
-```
-
-This download might take a while. Agree to download the full installation including examples. After the download is complete, you can run one of the examples to check if the sensor is working:
-```console
-python /home/pi/Pimoroni/envirophat/examples/all.py
-```
-
-The output should look similar to the content of the box below. However, values should be different.
-```console
-Altitude: 274.41m
-Light: 2
-RGB: 127, 127, 127
-Heading: 266.71
-Magnetometer: 27 -9782 -3042
-Accelerometer: -0.1g 0.02g -0.94g
-Analog: 0: 0.519, 1: 0.519, 2: 0.537, 3: 0.549
-```
+### Preparation
+Before you proceed, make sure that you [set up the raspberry pi correctly](docs/SETUP.md), [enabled the I2C protocol](docs/I2C.md), and [installed the Enviro pHat library and dependencies](docs/DEPEND.md). 
 
 ### Cloning Repository
-0. Before you can clone the repository, you must generate a [token](https://github.com/settings/tokens) that allows repo actions. If you do not plan to work with the raspberry later, just let the token expire on the next day.
+0. Before you can clone the repository, you must generate a [token](https://github.com/settings/tokens) that allows repo actions. If you do not plan to work with the raspberry later, just let the token expire on the next day. The token will be used as the password when asked for it.
 
-1. Within the SSH-connection, type:
+1. Within the SSH-connection and in home directory, type:
 ```console
-clear
-cd ~
 git clone https://github.com/wintechis/enviropi.git
 ```
 2. Change directory to the repo folder.
